@@ -6,7 +6,7 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 BEGIN { use_ok('File::MultiCat') };
 
 #########################
@@ -17,13 +17,15 @@ BEGIN { use_ok('File::MultiCat') };
 BEGIN {
 my $ob = File::MultiCat->new();
 ok(defined multicat);
-ok($ob->multicat);
+ok($ob->multicat('xot'));
 }
 
 # EXAMPLE FILES:
-# After running this, your pwd should have a "1.html" and "2.html"
-#   built from the example files (top, bottom, 1.txt, and 2.txt)
-#   using 'multicat.dat' for direction of how to build them.
+# After running this, your working directory should have a
+#   "1.html", "2.html", and "3.html"
+#   built from the example files (top, bottom, 1.txt, 2.txt, and 3.txt).
+#   using 'xot' for direction of how to build them.
+#   (And, 'xot' would default to 'multicat.dat' if not called by name.)
 #   A careful look at these files will help you to understand how
 #   the module works.
 

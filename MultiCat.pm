@@ -1,4 +1,4 @@
-package File::MultiCat;
+package File::MultiCat; 
 use 5.008;
 use strict;
 # use -w;  -- replaced by the better...
@@ -8,7 +8,7 @@ use warnings;
 # our %EXPORT_TAGS = ( 'all' => [qw(multicat)] );
 # our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 # our @EXPORT = qw();
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # use vars qw(@f $f @ar $ar $fout);
 use subs qw(new multicat _multicat_error);
@@ -36,10 +36,16 @@ sub multicat {
   foreach $f (@f){
   # take each line of the site description file
     my (@splitLine, $ofi, $ifi);
-    @splitLine=split(/ +/, $f);
+
+    $f =~ s/#.*//;
+    # strip comments
+
+    # @splitLine=split(/ +/, $f);
+    if($f) {@splitLine = split(' ', $f);}
       # split the line, at any number of space characters, into an array
-    $ofi = pop(@splitLine);
-      # remove last item in line's output filename ('pop' it),dddd
+    if (@splitLine) {$ofi = pop(@splitLine); }
+
+      # remove last item in line, the  output filename; ('pop' it),dddd
       # leaving the rest of the line in @splitline.
     if (@splitLine){
       # test because multicat.dat might have empty lines
@@ -47,6 +53,7 @@ sub multicat {
         open(OUT, ">$ofi") || _multicat_error('opensk', 'file', $ofi);
           #open line's output file, the last filename on the line
         foreach $ifi (@splitLine) {
+          # print "-$ifi-";
             # take each remaining filename from the line
           open(XIN, "<$ifi")|| _multicat_error('open', 'file', $ifi);
           my @dat = <XIN>;
@@ -58,6 +65,7 @@ sub multicat {
         close OUT || _multicat_error('close', 'file', $ofi); #close line's output file
     }
   }
+  return 1;
 }
 
 sub _multicat_error{
@@ -65,14 +73,13 @@ sub _multicat_error{
    exit;   # or comment this line out and do not exit
 }
 
-
 1;
 __END__
 # Below is stub documentation for this module:
 
 =head1 NAME
 
-File::MultiCat - Perl extension for preprocessing/concatinating files
+File::MultiCat - Perl extension for preprocessing/concatenating files
 for websites.
 
 =head1 SYNOPSIS
@@ -84,8 +91,8 @@ for websites.
 =head1 ABSTRACT
 
   Abstract for File::MultiCat, PPD (Perl Package Description) files.
-  Read a file to make a website by concatinating files.
-   First filenames on each line are concatinated
+  Read a file to make a website by concatenating files.
+   First filenames on each line are concatenated
    to the last filename on that line, in order.
 
 =head1 DESCRIPTION
@@ -98,7 +105,7 @@ multicat is a module that does the following:
 
  Each line in the file is parsed.
 
- First filenames on each line are concatinated
+ First filenames on each line are concatenated
    to the last filename on that line, in order.
 
  Separator between filenames is any number of spaces.
@@ -119,7 +126,7 @@ but this one acts entirely from
 outside the files being created.)
 
 The challenge to the website author is to find the best way
-to make up each concatinated file leaving maximum room for
+to make up each concatenated file leaving maximum room for
 modifying the website later.
 
 =head2 EXPORT

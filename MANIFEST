@@ -10,7 +10,8 @@ top      (example used by multicat.dat)
 bottom   (example used by multicat.dat)
 1.txt    (example used by multicat.dat)
 2.txt    (example used by multicat.dat)
+3.txt    (example used by multicat.dat)
 
-
-t/1.t
+t/1.t    (testing file, called with 'make test'
+          from this directory)
 

@@ -1,6 +1,7 @@
-File::MultiCat version 0.03
+File::MultiCat version 0.04
 ======================
-A very simple concatinating website preprocessor.
+A very simple concatenating website preprocessor/
+  multiple file concatenator.
 
 INSTALLATION
 
@@ -18,7 +19,7 @@ This module requires these other modules and libraries:
  strict
  warnings
 
- .......which you very probably already have running if you have Perl.
+ .......which you very probably already have if you have Perl.
 
 COPYRIGHT AND LICENCE
 
@@ -26,7 +27,7 @@ Copyright (C) 2004 Michael B. Stevens.  All rights reserved.
 This is free software, and may be
 destributed under terms of the Gnu Public License.
 
-
+--------------------------------------------------
 --------------------------------------------------
 WHY PREPROCESSING?
 
@@ -71,6 +72,8 @@ This module differs from other preprocessors in that it does not
 use an internal macro language in the file it processes.  Instead,
 it builds files from other files, as you will see below.
 ---------------------------------------------------------------
+---------------------------------------------------------------
+
 HOW TO USE THIS MODULE
 
 Add the line:
@@ -93,12 +96,21 @@ html4.txt.txt  menu.txt mid6.txt bottom.txt x6.html
 
 On each line of the example, the last filename is the output
 file.  All the other files named on the line
-are combined (concatinated), in
+are combined (concatenated), in
 the order they appear, to make this final file.
 
 Common menus, footers, and the like can be used
 for different pages easily.
 
+__________
+NEW in 0.04:  You can now have comments in the
+site description file.  Comments start with the
+start ('#') character, just as in most 'nix
+configuration files.
+
+Be sure to look at the example 'xot' site description file
+to get all the gory details.
+_______
 
 You can name the site description file anything you want.
 If you name it 'xot' then the call would be:
@@ -111,16 +123,24 @@ the script will look for the default
 
 multicat.dat
 
-...in your present working
+...in your working
 directory.
-______________________________
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
 CONTACT:
 webmaster@mbstevens.com
 http://www.mbstevens.com/preprocessor/index.html
 (...where you can find a similar, non-module, script version
-with another preprocessing script in the same package.)
+and a different macro-preprocessing script in the same package.)
 
-I hope you find the tiny module useful.
+I hope you find the tiny module useful.  If you find new
+uses for it in addition to preprocessing web pages, let me
+know!  If you're writing a more sophisticated preprocessor,
+say one that incorporates a macro language, you can add this
+module's non-macro preprocessor with 3 lines of code plus
+your site description file.
+
 Cheers,
 Michael B. Stevens
 

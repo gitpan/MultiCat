@@ -9,3 +9,12 @@ Revision history for Perl extension File::MultiCat.
 0.03  Added text of the Gnu Public License ("gpl.txt"), and made
        a correction to README (Aug. 2, 2004)
 
+0.04  Improved regular expressions.
+
+      Added the ability to use comments (starting with the
+      sharp '#' character) in multicat.dat
+      (or any site description file.)
+
+      Some improvements in documentation.
+
+      (Aug. 10, 2004)
