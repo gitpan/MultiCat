@@ -1,6 +1,10 @@
-File::MultiCat version 0.01
+File::MultiCat version 0.02
 ======================
 A very simple concatinating website preprocessor.
+
+(This document is basically the same as the 0.01 version.
+The changes in this version are corrections of the stub docs
+at the bottom of MultiCat.pm.)
 
 
 INSTALLATION

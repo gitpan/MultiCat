@@ -8,7 +8,7 @@ require Exporter;
 # our %EXPORT_TAGS = ( 'all' => [qw(multicat)] );
 # our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 # our @EXPORT = qw();
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # use vars qw(@f $f @ar $ar $fout);
 use subs qw(new multicat _multicat_error);
@@ -77,19 +77,20 @@ for websites.
 
 =head1 SYNOPSIS
 
-  use multicat::multicat;
-  multicat [file];
+  use File::MultiCat;
+  my $ob = File::MultiCat->new();
+  $ob->multicat;
 
 =head1 ABSTRACT
 
-  Abstract for multicat::multicat, PPD (Perl Package Description) files.
+  Abstract for File::MultiCat, PPD (Perl Package Description) files.
   Read a file to make a website by concatinating files.
    First filenames on each line are concatinated
    to the last filename on that line, in order.
 
 =head1 DESCRIPTION
 
-Stub documentation for multicat::multicat, templeted by h2xs.
+Stub documentation for File::MultiCat, templeted by h2xs.
 multicat is a module that does the following:
 
  Opens the specified input file,
@@ -102,27 +103,24 @@ multicat is a module that does the following:
 
  Separator between filenames is any number of spaces.
 
-Example contents of an multicat.dat file:
+Example  of a single line of a multicat.dat file:
 
 header.txt menu.txt a.txt footer.txt a.html
-header.txt menu.txt b.txt footer.txt b.html
-header.txt menu.txt c.txt footer.txt c.html
 
 ...would create a.html from
 header.txt, menu.txt, a.txt, and footer.txt.
-Similarly for b.html and c.html.  This module doesn't
+This module doesn't
 have to be used to preprocess websites -- this is just the
-most obvious use.
+most obvious use.  Since each line builds a file, you can
+describe how to build an entire website in minutes.
+
 (Most preprocessors work more as macro processors,
 but this one acts entirely from
 outside the files being created.)
+
 The challenge to the website author is to find the best way
 to make up each concatinated file leaving maximum room for
-modifying the website later.  In our example, if the author
-wanted to change the footers for all the .html files on the
-website, footer.txt would be changed, multicat would be called,
-and the entire site would be changed. Then you just upload the
-changed site while you go drink a cup of coffe.
+modifying the website later.
 
 =head2 EXPORT
 
@@ -132,15 +130,11 @@ None by default.
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
 See http://www.mbstevens.com/preprocessor/index.html   for further info.
-Email:  webmaster@mbstevens.com      or    stevens4000@earthlink.net
+The download from that site has a script (as opposed to module) under the
+name mcat.pl.
+
+Email:  webmaster@mbstevens.com
 
 =head1 AUTHOR
 
@@ -151,6 +145,6 @@ Michael B. Stevens, E<lt>webmaster@mbstevens.comE<gt>
 Copyright 2004 by Michael B. Stevens
 
 This library is free software; you can redistribute it and/or modify
-it under terms of the GPL. 
+it under terms of the Gnu Public License.
 
 =cut
