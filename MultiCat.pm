@@ -1,0 +1,156 @@
+package File::MultiCat;
+use 5.008;
+use strict;
+# use -w;  -- replaced by the better...
+use warnings;
+require Exporter;
+# our @ISA = qw(Exporter);
+# our %EXPORT_TAGS = ( 'all' => [qw(multicat)] );
+# our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
+# our @EXPORT = qw();
+our $VERSION = '0.01';
+
+# use vars qw(@f $f @ar $ar $fout);
+use subs qw(new multicat _multicat_error);
+
+sub new {
+  my $class = shift;
+  my($self)= {};
+  bless ($self, $class);
+  # multicat($ar);
+  return ($self);
+}
+
+sub multicat {
+  use vars qw(@f $f $ar @ar $fout $self);
+  ($self, $ar) = @_;
+  #Get the name of the site description file, open it, or open default multicat.dat
+  if ($ar) {
+   open(IN, $ar ) || _multicat_error('open', 'file');
+  } else {
+   open(IN, "multicat.dat") || _multicat_error('open', 'file', 'multicat.dat');
+  }
+  @f = <IN>;
+  close IN || _multicat_error('close', 'file', 'multicat.dat');
+
+  foreach $f (@f){
+  # take each line of the site description file
+    my (@splitLine, $ofi, $ifi);
+    @splitLine=split(/ +/, $f);
+      # split the line, at any number of space characters, into an array
+    $ofi = pop(@splitLine);
+      # remove last item in line's output filename ('pop' it),dddd
+      # leaving the rest of the line in @splitline.
+    if (@splitLine){
+      # test because multicat.dat might have empty lines
+      # and throw an error otherwise.
+        open(OUT, ">$ofi") || _multicat_error('opensk', 'file', $ofi);
+          #open line's output file, the last filename on the line
+        foreach $ifi (@splitLine) {
+            # take each remaining filename from the line
+          open(XIN, "<$ifi")|| _multicat_error('open', 'file', $ifi);
+          my @dat = <XIN>;
+            # write that file's data, in order read in,
+            # to the line's output file
+          print OUT "@dat\n";
+          close XIN || _multicat_error('close', 'file', $ifi);
+        }
+        close OUT || _multicat_error('close', 'file', $ofi); #close line's output file
+    }
+  }
+}
+
+sub _multicat_error{
+   print "problem, can't $_[0] a $_[1], named $_[2]";
+   exit;   # or comment this line out and do not exit
+}
+
+
+1;
+__END__
+# Below is stub documentation for this module:
+
+=head1 NAME
+
+File::MultiCat - Perl extension for preprocessing/concatinating files
+for websites.
+
+=head1 SYNOPSIS
+
+  use multicat::multicat;
+  multicat [file];
+
+=head1 ABSTRACT
+
+  Abstract for multicat::multicat, PPD (Perl Package Description) files.
+  Read a file to make a website by concatinating files.
+   First filenames on each line are concatinated
+   to the last filename on that line, in order.
+
+=head1 DESCRIPTION
+
+Stub documentation for multicat::multicat, templeted by h2xs.
+multicat is a module that does the following:
+
+ Opens the specified input file,
+   or 'multicat.dat' if none specified.
+
+ Each line in the file is parsed.
+
+ First filenames on each line are concatinated
+   to the last filename on that line, in order.
+
+ Separator between filenames is any number of spaces.
+
+Example contents of an multicat.dat file:
+
+header.txt menu.txt a.txt footer.txt a.html
+header.txt menu.txt b.txt footer.txt b.html
+header.txt menu.txt c.txt footer.txt c.html
+
+...would create a.html from
+header.txt, menu.txt, a.txt, and footer.txt.
+Similarly for b.html and c.html.  This module doesn't
+have to be used to preprocess websites -- this is just the
+most obvious use.
+(Most preprocessors work more as macro processors,
+but this one acts entirely from
+outside the files being created.)
+The challenge to the website author is to find the best way
+to make up each concatinated file leaving maximum room for
+modifying the website later.  In our example, if the author
+wanted to change the footers for all the .html files on the
+website, footer.txt would be changed, multicat would be called,
+and the entire site would be changed. Then you just upload the
+changed site while you go drink a cup of coffe.
+
+=head2 EXPORT
+
+None by default.
+
+
+
+=head1 SEE ALSO
+
+Mention other useful documentation such as the documentation of
+related modules or operating system documentation (such as man pages
+in UNIX), or any relevant external documentation such as RFCs or
+standards.
+
+If you have a mailing list set up for your module, mention it here.
+
+See http://www.mbstevens.com/preprocessor/index.html   for further info.
+Email:  webmaster@mbstevens.com      or    stevens4000@earthlink.net
+
+=head1 AUTHOR
+
+Michael B. Stevens, E<lt>webmaster@mbstevens.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2004 by Michael B. Stevens
+
+This library is free software; you can redistribute it and/or modify
+it under terms of the GPL. 
+
+=cut
