@@ -3,12 +3,12 @@ use 5.008;
 use strict;
 # use -w;  -- replaced by the better...
 use warnings;
-require Exporter;
+# require Exporter;
 # our @ISA = qw(Exporter);
 # our %EXPORT_TAGS = ( 'all' => [qw(multicat)] );
 # our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 # our @EXPORT = qw();
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 # use vars qw(@f $f @ar $ar $fout);
 use subs qw(new multicat _multicat_error);

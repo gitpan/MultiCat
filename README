@@ -1,11 +1,6 @@
-File::MultiCat version 0.02
+File::MultiCat version 0.03
 ======================
 A very simple concatinating website preprocessor.
-
-(This document is basically the same as the 0.01 version.
-The changes in this version are corrections of the stub docs
-at the bottom of MultiCat.pm.)
-
 
 INSTALLATION
 
@@ -85,7 +80,7 @@ use File::MultiCat
 ...to use the MultiCat module.
 
 Make the text files to combine, and then write a text
-file (defaults to siteDescription.txt) showing how to
+file (defaults to multicat.dat) showing how to
 combine them.  This is easy.  Here is an example:
 
 xhtmlTrans.txt menu.txt mid0.txt bottom.txt x0.html

@@ -4,5 +4,8 @@ Revision history for Perl extension File::MultiCat.
 	- original version; created by h2xs 1.22 with options
 		-X -A -n File::MultiCat
 
-0.02  Corrected several mistakes in stub documentation.  This version
-	should definitely be used instead of 0.01 if possible.
+0.02  Corrected several mistakes in stub documentation.
+
+0.03  Added text of the Gnu Public License ("gpl.txt"), and made
+       a correction to README (Aug. 2, 2004)
+
